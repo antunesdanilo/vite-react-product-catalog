@@ -1,0 +1,39 @@
+{
+  "product": [
+    {
+      "productId": 1,
+      "categoryId": 1,
+      "title": "Produto 1",
+      "description": "Pão, bife de hambúrguer 90g, salada e batata.",
+      "price": 8.5
+    },
+    {
+      "productId": 2,
+      "categoryId": 1,
+      "title": "Produto 2",
+      "description": "Pão, bife de hambúrguer 90g, salada e batata.",
+      "price": 8.5
+    },
+    {
+      "productId": 3,
+      "categoryId": 1,
+      "title": "Teste",
+      "description": "Pão, bife de hambúrguer 90g, salada e batata.",
+      "price": 8.5
+    }
+  ],
+  "category": [
+    {
+      "categoryId": 1,
+      "categoryName": "Acessórios"
+    },
+    {
+      "categoryId": 2,
+      "categoryName": "Pneus"
+    },
+    {
+      "categoryId": 3,
+      "categoryName": "Ferramentas"
+    }
+  ]
+}

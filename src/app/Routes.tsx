@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { ProductsList } from '../modules/products-list/components/list';
+import { ProductsList } from '../modules/product/components/list';
 
 const Routes: React.FC = () => {
   const router = createBrowserRouter([
