@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './style.scss';
 import { ProductDto } from '../../dtos/product.dto';
 import { ProductService } from '../../services/product.service';
+import { Header } from '../../../shared/components/header';
+import { ProductsListFilter } from '../list-filter';
 
 const productService = new ProductService();
 
@@ -20,11 +22,15 @@ const ProductsList: React.FC = () => {
   }
 
   return (
-    <div id="products-list">
-      {products.map((product: ProductDto) => (
-        <div key={product.productId}>{product.title}</div>
-      ))}
-    </div>
+    <>
+      <Header />
+      <ProductsListFilter />
+      <div id="products-list">
+        {products.map((product: ProductDto) => (
+          <div key={product.productId}>{product.title}</div>
+        ))}
+      </div>
+    </>
   );
 };
 
