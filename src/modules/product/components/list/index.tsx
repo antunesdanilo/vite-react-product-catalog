@@ -1,35 +1,64 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './style.scss';
+
+import { ProductCategoryDto } from '../../dtos/product-category.dto';
 import { ProductDto } from '../../dtos/product.dto';
-import { ProductService } from '../../services/product.service';
+
 import { Header } from '../../../shared/components/header';
 import { ProductsListFilter } from '../list-filter';
+import { ProductsListItem } from '../list-item';
 
+import { useAppSelector } from '../../../../hooks';
+import { selectProductFilter } from '../../../../reducers/product-filter.slice';
+
+import { ProductService } from '../../services/product.service';
+import { Footer } from '../../../shared/components/footer';
 const productService = new ProductService();
 
 const ProductsList: React.FC = () => {
+  const { categoryId, keyword } = useAppSelector(selectProductFilter);
+  
+  const [categories, setCategories] = useState<ProductCategoryDto[]>([]);
   const [products, setProducts] = useState<ProductDto[]>([]);
 
   useEffect(() => {
+    getCategories();
     getProducts();
   }, []);
 
+  const getCategories = (): void => {
+    productService.getCategories().then((categories: ProductCategoryDto[]) => {
+      setCategories(categories);
+    });
+  }
+
   const getProducts = (): void => {
-    productService.getProducts({categoryId: 1, keyword: 'teste'}).then((products: ProductDto[]) => {
-      console.log(products)
+    productService.getProducts().then((products: ProductDto[]) => {
       setProducts(products);
     });
   }
 
+  const filteredProducts = useMemo((): ProductDto[] => {
+    let filtered = products;
+    if (categoryId) {
+      filtered = filtered.filter((product: ProductDto) => product.categoryId === categoryId);
+    }
+    if (keyword) {
+      filtered = filtered.filter((product: ProductDto) => product.title.toLowerCase().indexOf(keyword.toLowerCase()) > -1 || product.description.toLowerCase().indexOf(keyword.toLowerCase()) > -1 );
+    }
+    return filtered;
+  }, [products, categoryId, keyword]);
+
   return (
     <>
       <Header />
-      <ProductsListFilter />
-      <div id="products-list">
-        {products.map((product: ProductDto) => (
-          <div key={product.productId}>{product.title}</div>
+      <ProductsListFilter categories={categories} />
+      <div id="products-list" className='container flex flex-row flex-wrap gap-5 my-5'>
+        {filteredProducts.map((product: ProductDto) => (
+          <ProductsListItem key={product.id} product={product} />
         ))}
       </div>
+      <Footer />
     </>
   );
 };

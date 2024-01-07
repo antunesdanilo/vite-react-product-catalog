@@ -1,14 +1,18 @@
+@import '../styles/fonts/index.scss';
+@import '../styles/components/dialog.scss';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-  font-family: Roboto;
-}
-
 body {
   scrollbar-width: thin;
   background: white;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 500;
 }
 
 &::-webkit-scrollbar {
@@ -26,4 +30,8 @@ body {
 /* Handle on hover */
 &::-webkit-scrollbar-thumb:hover {
   background: #ccc;
+}
+
+a:hover {
+  text-decoration: underline;
 }

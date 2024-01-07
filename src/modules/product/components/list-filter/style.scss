@@ -1,3 +1,28 @@
 #product-list-filter {
-  
+	.category-pill {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-right: 0.5rem;
+    margin-top: 0.5rem;
+		border: solid 1px theme('colors.gray.300');
+		color: theme('colors.primary');
+		height: 32px;
+		border-radius: 16px;
+		padding: 0 1rem;
+		font-weight: 500;
+		&.active {
+			border: none;
+			border: solid 1px theme('colors.primary');
+			background-color: theme('colors.primary');
+			color: white;
+      
+		}
+	}
+
+  .keyword {
+    &:focus {
+      outline-color: theme('colors.primary');
+    }
+  }
 }

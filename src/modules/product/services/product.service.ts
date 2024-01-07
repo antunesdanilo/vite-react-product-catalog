@@ -1,23 +1,21 @@
 import { ApiService } from "../../shared/services/api.service";
+import { ProductCategoryDto } from "../dtos/product-category.dto";
 import { ProductDto } from "../dtos/product.dto";
-import { ProductFilterInput } from "../inputs/product-filter.input";
 
 export class ProductService extends ApiService {
-  async getProducts(filter: ProductFilterInput): Promise<ProductDto[]> {
-    const { categoryId, keyword } = filter;
+  async getCategories(): Promise<ProductCategoryDto[]> {
+    return (await this.get<ProductCategoryDto[]>('/category')).data;
+  }
 
-    const filterArray: string[] = [];
+  async getCategory(categoryId: number): Promise<ProductCategoryDto> {
+    return (await this.get<ProductCategoryDto>(`/category/${categoryId}`)).data;
+  }
 
-    if (categoryId) {
-      filterArray.push(`categoryId=${categoryId}`);
-    }
+  async getProducts(): Promise<ProductDto[]> {    
+    return (await this.get<ProductDto[]>('/product')).data;
+  }
 
-    if (keyword) {
-      filterArray.push(`q=${keyword}`);
-    }
-
-    const query: string = filterArray.length > 0 ? `?${filterArray.join('&')}` : '';
-    
-    return (await this.get<ProductDto[]>(`/product/${query}`)).data;
+  async getProduct(productId: number): Promise<ProductDto> {    
+    return (await this.get<ProductDto>(`/product/${productId}`)).data;
   }
 }

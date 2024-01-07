@@ -1,0 +1,21 @@
+#product-list-item {
+  position: relative;
+  border-radius: 8px;
+  width: 250px;
+  height: 222px;
+  border: solid 1px #CCCCCC;
+  .buttons-container {
+    background-color: white;
+    display: none;
+    position: absolute;
+    bottom: 0;
+  }
+  .title-container {
+    height: 80px;
+  }
+  &:hover {
+    .buttons-container {
+      display: flex;
+    }
+  }
+}

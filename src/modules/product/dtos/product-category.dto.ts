@@ -1,4 +1,4 @@
 export interface ProductCategoryDto {
-  categoryId: number;
+  id: number;
   categoryName: string;
 }

@@ -1,0 +1,20 @@
+@import "../../../../styles/mixins/breakpoints.scss";
+
+#product-details {
+  min-height: calc(100vh - 163px);
+  @include media-breakpoint-up(theme('screens.sm')) {
+    min-height: calc(100vh - 122px);
+  }
+
+  .count-container {
+    input {
+      border-radius: 8px 0 0 8px;
+      &:focus {
+        outline-color: theme('colors.primary');
+      }
+    }
+    button {
+      border-radius: 0 8px 8px 0;
+    }
+  }
+}

@@ -1,3 +1,16 @@
+@import "../../../../styles/mixins/breakpoints.scss";
+
 #products-list {
-  
+  display: flex;
+  min-height: calc(100vh - 450px);
+  justify-content: center;
+  @include media-breakpoint-up(517px) {
+    min-height: calc(100vh - 410px);
+  }
+  @include media-breakpoint-up(554px) {
+    justify-content: start;
+  }
+  @include media-breakpoint-up(theme('screens.sm')) {
+    min-height: calc(100vh - 369px);
+  }
 }
