@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { selectProductFilter, setCategoryId, setKeyword } from "../../../../reducers/product-filter.slice";
 
 import './style.scss';
+import Skeleton from "../../../shared/components/skeleton";
 
 interface ProductsListFilterProps {
   categories: ProductCategoryDto[];
@@ -44,6 +45,9 @@ const ProductsListFilter: React.FC<ProductsListFilterProps> = ({ categories }) =
               tabIndex={0}
             >{category.categoryName}</div>
           ))}
+          {!categories.length && (
+            <Skeleton repeat={5} width='150px' height='30px' />
+          )}
         </div>
       </div>
       <div className="mt-4">

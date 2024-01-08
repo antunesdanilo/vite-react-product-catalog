@@ -19,15 +19,20 @@ const Header: React.FC = () => {
             <img src='/logo.jpg' alt="logo" />
           </h1>
         </Link>
-        <Link to='/checkout'>
-          <div className="cart-link flex items-center justify-end pe-[5px]">
-            <ShoppingCartCheckoutIcon sx={{ fontSize: 32, color: '#999999'}} />
-            {checkout.items.length > 0 && (
-            <div className="cart-count">
-              {checkout.items.length}
-            </div>)}
-          </div>
-        </Link>
+        <div className="flex flex-row items-center">
+          <Link to='/'>
+            <div className="text-gray-600 text-lg">Produtos</div>
+          </Link>
+          <Link to='/checkout'>
+            <div className="cart-link flex items-center justify-end pe-[5px]">
+              <ShoppingCartCheckoutIcon sx={{ fontSize: 32, color: '#999999'}} />
+              {checkout.items.length > 0 && (
+              <div className="cart-count">
+                {checkout.items.length}
+              </div>)}
+            </div>
+          </Link>
+        </div>
       </div>
     </nav>
   );

@@ -1,8 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './style.scss';
 
-import { ProductService } from '../../services/product.service';
 import { ProductDto } from '../../dtos/product.dto';
 import { Header } from '../../../shared/components/header';
 import { Footer } from '../../../shared/components/footer';
@@ -12,11 +11,17 @@ import { formatCurrency } from '../../../../utils/formatters';
 import { useAppDispatch } from '../../../../hooks';
 import { addItemToCart } from '../../../../reducers/checkout.slice';
 import { notify } from '../../../../utils/notify.util';
+import Skeleton from '../../../shared/components/skeleton';
+
+import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
+
+import { ProductService } from '../../services/product.service';
 const productService = new ProductService();
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams();
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [product, setProduct] = useState<ProductDto | undefined>();
@@ -63,7 +68,7 @@ const ProductDetails: React.FC = () => {
       <div id="product-details" className='container flex flex-col lg:flex-row mt-6'>
         {product && (<>
           <div className='lg:flex-1 lg:mr-6'>
-            <div className='w-[100%] aspect-video overflow-hidden flex items-center'>
+            <div className='w-[100%] aspect-video overflow-hidden flex items-center rounded-md'>
               <img 
                 src={product?.images[imageIndex]}
                 alt={product?.title}
@@ -75,7 +80,7 @@ const ProductDetails: React.FC = () => {
                   key={index}
                   onClick={() =>setImageIndex(index)}
                   className={classNames({
-                    'w-[160px] h-[90px] overflow-hidden flex items-center border border-2': true,
+                    'w-[160px] h-[90px] overflow-hidden flex items-center border border-2 rounded-md': true,
                     'border-primary': imageIndex === index,
                     'border-transparent': imageIndex !== index,
                   })}
@@ -87,7 +92,15 @@ const ProductDetails: React.FC = () => {
           </div>
 
           <div className="lg:flex-1 mt-5 lg:mt-0 mb-6">
-            <h2 className="text-gray-500 leading-6">{product?.title}</h2>
+            <h2 className="text-gray-500 leading-6 flex flex-row items-center">
+              <button
+                className='mr-3 rounded-full border border-gray-300 w-[30px] h-[30px] cursor-pointer flex justify-center items-center pl-[6px] pt-[2px] hover:bg-gray-300 hover:text-white'
+                onClick={() => navigate(-1)}
+              >
+                <ArrowBackIos sx={{ fontSize: 20, marginBottom: '2px' }} />
+              </button>
+              {product?.title}
+            </h2>
             <div className='text-gray-500 mt-3'>Categoria: {category?.categoryName}</div>
             <div className='mt-3 text-primary text-2xl'>{formatCurrency({ value: product.price})}</div>
             <div className='count-container flex flex-row items-center mt-3'>
@@ -106,6 +119,20 @@ const ProductDetails: React.FC = () => {
               </button>
             </div>
             <div className='text-gray-500 mt-4'>{product?.description}</div>
+          </div>
+        </>)}
+
+        {!product && (<>
+          <div className='lg:flex-1 lg:mr-6'>
+            <Skeleton repeat={1} height='250px' />
+            <Skeleton repeat={2} width='160px' height='90px' />
+          </div>
+          <div className="lg:flex-1 mt-5 lg:mt-0 mb-6">
+            <Skeleton repeat={1} width='250px' height='35px' />
+            <Skeleton repeat={1} width='220px' height='25px' />
+            <Skeleton repeat={1} width='200px' height='35px' />
+            <Skeleton repeat={1} width='300px' height='45px' />
+            <Skeleton repeat={1} width='100%' height='150px' />
           </div>
         </>)}
       </div>

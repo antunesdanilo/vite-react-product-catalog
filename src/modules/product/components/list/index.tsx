@@ -13,6 +13,7 @@ import { selectProductFilter } from '../../../../reducers/product-filter.slice';
 
 import { ProductService } from '../../services/product.service';
 import { Footer } from '../../../shared/components/footer';
+import Skeleton from '../../../shared/components/skeleton';
 const productService = new ProductService();
 
 const ProductsList: React.FC = () => {
@@ -57,6 +58,9 @@ const ProductsList: React.FC = () => {
         {filteredProducts.map((product: ProductDto) => (
           <ProductsListItem key={product.id} product={product} />
         ))}
+        {!products.length && (
+          <Skeleton repeat={12} width='250px' height='222px' />
+        )}
       </div>
       <Footer />
     </>
