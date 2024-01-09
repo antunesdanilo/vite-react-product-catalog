@@ -1,9 +1,9 @@
 import axios, { AxiosInstance, AxiosResponse, RawAxiosRequestHeaders } from 'axios';
-import { HttpMethodEnum } from "../enums/http-method.enum";
+import { HttpMethodEnum } from '../enums/http-method.enum';
 
 export class ApiService {
   private baseURL = 'http://localhost:3000';
-  
+
   private axios?: AxiosInstance;
 
   async http<T>(method: HttpMethodEnum, path: string, data: any = {}) {
