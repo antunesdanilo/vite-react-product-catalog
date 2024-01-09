@@ -1,0 +1,12 @@
+FROM public.ecr.aws/bitnami/node:latest
+
+RUN mkdir /usr/share/api
+
+WORKDIR /usr/share/api
+RUN yarn global add json-server@0.17.4
+COPY ./package.json ./package.json
+COPY ./db.json ./db.json
+
+EXPOSE 3000
+
+CMD ["sh", "-c", "yarn json-server"]

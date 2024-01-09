@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  backend:
+    container_name: api
+    build:
+      context: .
+      dockerfile: DockerfileApi
+    ports:
+      - '3000:3000'
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+    ports:
+      - '80:80'
