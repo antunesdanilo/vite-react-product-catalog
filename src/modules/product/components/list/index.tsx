@@ -61,6 +61,11 @@ const ProductsList: React.FC = () => {
         {!products.length && (
           <Skeleton repeat={12} width='250px' height='222px' />
         )}
+        {!filteredProducts.length && (
+          <div className="text-[24px] text-gray-500 mt-8">
+            OPS! Não encontramos nenhum produto que atenda ao filtro selecionado.
+          </div>
+        )}
       </div>
       <Footer />
     </>
